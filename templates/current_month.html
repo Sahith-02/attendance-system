@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .warning {
+            background-color: #ffc107; /* Yellow */
+        }
+        .danger {
+            background-color: #dc3545; /* Red */
+            color: white;
+        }
+        .good {
+            background-color: #28a745; /* Green */
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>{{ title }}</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Attendance Percentage for Current Month</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Attendance Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in data %}
+                        {% if record.attendance_percentage < 60 %}
+                        <tr class="danger">
+                        {% elif record.attendance_percentage < 75 %}
+                        <tr class="warning">
+                        {% else %}
+                        <tr class="good">
+                        {% endif %}
+                            <td>{{ record.name }}</td>
+                            <td>{{ record.attendance_percentage }}%</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
